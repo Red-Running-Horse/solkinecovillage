@@ -1,0 +1,30 @@
+---
+import { navigation, site } from "@/data/site";
+---
+
+<footer class="site-footer">
+  <div class="footer-mark">
+    <img
+      src="/brand/sol-kin-logo.webp"
+      width="512"
+      height="512"
+      alt={`${site.name} stacked wordmark`}
+      loading="lazy"
+    />
+  </div>
+  <div>
+    <p class="footer-statement">
+      A public field atlas for biodiversity work, community discovery, and
+      evidence-led participation in the Yucatan Peninsula.
+    </p>
+    <p class="source-language">
+      English is the complete launch language. Spanish source passages are
+      preserved where they carry the original record.
+    </p>
+  </div>
+  <nav aria-label="Footer navigation">
+    {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+    <a href="/organizations/">Organizations</a>
+    <a href="/events/">Events</a>
+  </nav>
+</footer>

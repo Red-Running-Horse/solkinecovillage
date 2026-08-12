@@ -1,0 +1,64 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import SourceNote from "@/components/SourceNote.astro";
+---
+
+<SiteLayout
+  title="Community discovery"
+  description="A verification-first directory for ecovillages and communities in the Yucatan Peninsula."
+>
+  <PageHeader
+    title="Find a community—when the listing is ready to be trusted."
+    marker="Community register"
+    introduction="The Sol Kin brief references roughly nine local ecovillages or communities. The current source library does not establish their names, locations, contacts, or participation offers."
+  />
+
+  <section class="content-section">
+    <div class="empty-register">
+      <h2>Public listings are waiting for confirmation.</h2>
+      <p>
+        This directory intentionally contains no invented entries. A community
+        appears only after its stewards confirm the public information below.
+      </p>
+    </div>
+  </section>
+
+  <section class="content-section section-grid field-path">
+    <div>
+      <h2>What every listing needs.</h2>
+    </div>
+    <div>
+      <ul class="record-list">
+        <li><strong>Name</strong><span>Confirmed public name and preferred spelling.</span></li>
+        <li><strong>Place</strong><span>Approved location granularity and access guidance.</span></li>
+        <li><strong>Steward</strong><span>A person or group authorized to maintain the listing.</span></li>
+        <li><strong>Offer</strong><span>Clear joining, visiting, volunteering, or learning pathway.</span></li>
+        <li><strong>Safeguards</strong><span>Expectations, accessibility, capacity, and community boundaries.</span></li>
+        <li><strong>Contact</strong><span>A confirmed public channel with consent to publish.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="content-section section-grid">
+    <div>
+      <h2>Help build the verified atlas.</h2>
+    </div>
+    <div>
+      <p class="section-copy">
+        Community stewards and people holding primary source material can
+        nominate an entry. Submission is an invitation to verify information,
+        not an automatic public listing.
+      </p>
+      <SourceNote>
+        <p>
+          The source library includes Red CASA Latina as a reference network,
+          but it does not provide a local Yucatan membership roster.
+        </p>
+      </SourceNote>
+      <a class="button" href="/support/?interest=community-nomination">
+        Prepare a community nomination
+      </a>
+    </div>
+  </section>
+</SiteLayout>

@@ -1,0 +1,120 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import SourceNote from "@/components/SourceNote.astro";
+import { organizations } from "@/data/organizations";
+---
+
+<SiteLayout
+  title="Organizations in the source library"
+  description="Organizations represented in Sol Kin's research library, with relationship status shown honestly."
+>
+  <PageHeader
+    title="Organizations in the research orbit—not a partner wall."
+    marker="Source library"
+    introduction="The repository contains reference notes and logos for five organizations. Those files support learning context, but they do not establish endorsement, partnership, sponsorship, or permission to present the logos publicly."
+  />
+
+  <section class="organization-ledger" aria-label="Referenced organizations">
+    {
+      organizations.map((organization) => (
+        <article>
+          <div>
+            <h2>{organization.name}</h2>
+            <p>{organization.role}</p>
+          </div>
+          <div class="relationship">
+            <span>{organization.relationship}</span>
+            <a href={organization.url} rel="noreferrer" target="_blank">
+              Visit public website <span class="sr-only">(opens in a new tab)</span> ↗
+            </a>
+          </div>
+          <code>{organization.sourcePath}</code>
+        </article>
+      ))
+    }
+  </section>
+
+  <section class="content-section section-grid">
+    <div>
+      <h2>Before these become associations.</h2>
+    </div>
+    <div>
+      <p class="section-copy">
+        Confirm the relationship directly, agree on public wording, verify the
+        current organization description, and obtain permission for logo use.
+        The content model can then change each record from reference to a
+        clearly defined association.
+      </p>
+      <SourceNote>
+        <p>
+          Several repository detail files read as secondary web-research notes
+          rather than primary agreements. Time-sensitive claims are therefore
+          omitted from this public page.
+        </p>
+      </SourceNote>
+    </div>
+  </section>
+</SiteLayout>
+
+<style>
+  .organization-ledger {
+    border-top: 2px solid var(--ink);
+  }
+
+  .organization-ledger article {
+    border-bottom: 2px solid var(--ink);
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: minmax(0, 1.3fr) minmax(16rem, 0.7fr);
+    padding: var(--space-lg) var(--gutter);
+  }
+
+  .organization-ledger article:hover {
+    background: var(--paper-blue);
+  }
+
+  .organization-ledger h2 {
+    font-size: clamp(2rem, 4vw, 4.2rem);
+  }
+
+  .relationship {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    justify-content: space-between;
+  }
+
+  .relationship span {
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .organization-ledger code {
+    font-size: 0.76rem;
+    grid-column: 1 / -1;
+    overflow-wrap: anywhere;
+  }
+
+  .sr-only {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+
+  @media (max-width: 48rem) {
+    .organization-ledger article {
+      grid-template-columns: 1fr;
+    }
+
+    .organization-ledger code {
+      grid-column: auto;
+    }
+  }
+</style>

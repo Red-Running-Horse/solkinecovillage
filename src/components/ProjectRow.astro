@@ -1,0 +1,25 @@
+---
+import type { Project } from "@/data/types";
+import StatusStamp from "./StatusStamp.astro";
+
+interface Props {
+  project: Project;
+  index: number;
+}
+
+const { project, index } = Astro.props;
+---
+
+<article class="project-row">
+  <span class="project-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+  <div class="project-row-main">
+    <h3><a href={`/projects/${project.slug}/`}>{project.title}</a></h3>
+    <p>{project.summary}</p>
+  </div>
+  <div class="project-row-status">
+    <StatusStamp status={project.status} evidenceState={project.evidenceState} />
+  </div>
+  <a class="arrow-link" href={`/projects/${project.slug}/`}>
+    Open field record <span aria-hidden="true">↗</span>
+  </a>
+</article>

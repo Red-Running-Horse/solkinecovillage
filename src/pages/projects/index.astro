@@ -1,0 +1,45 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import ProjectRow from "@/components/ProjectRow.astro";
+import SourceNote from "@/components/SourceNote.astro";
+import { projects } from "@/data/projects";
+---
+
+<SiteLayout
+  title="Biodiversity projects"
+  description="Explore Sol Kin's developing biodiversity and community initiatives, with known facts and open documentation needs shown clearly."
+>
+  <PageHeader
+    title="Projects under active documentation."
+    marker="Project register"
+    introduction="Three initiatives are named in the Sol Kin brief. Their field records show what is known, what comes from historical context, and what must be confirmed before broader public claims."
+  />
+
+  <section class="project-ledger" aria-label="Current projects">
+    {projects.map((project, index) => <ProjectRow {project} {index} />)}
+  </section>
+
+  <section class="content-section section-grid field-path">
+    <div>
+      <h2>How a field record grows.</h2>
+    </div>
+    <div>
+      <p class="section-copy">
+        Each project can expand with approved descriptions, stewards, places,
+        methods, baseline observations, reports, media, events, and
+        participation calls—without changing the page components.
+      </p>
+      <SourceNote label="Publication rule">
+        <p>
+          Project names can come from the Sol Kin brief. Claims about species,
+          Indigenous knowledge, outcomes, certification, bookings, or finance
+          require a primary source and appropriate community approval.
+        </p>
+      </SourceNote>
+      <a class="button light" href="/learn/accreditation/">
+        See the evidence pathway
+      </a>
+    </div>
+  </section>
+</SiteLayout>

@@ -1,0 +1,189 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import SourceNote from "@/components/SourceNote.astro";
+import { tgbsCriteria, tgbsTiers } from "@/data/standards";
+---
+
+<SiteLayout
+  title="Accreditation and standards"
+  description="A practical, source-backed introduction to biodiversity project preparation and The Global Biodiversity Standard."
+>
+  <PageHeader
+    title="Accreditation begins long before an application."
+    marker="Standards pathway"
+    introduction="A community needs a mandate, baseline, restoration plan, monitoring practice, and evidence trail before selecting an external standard. The current Sol Kin initiatives are not represented as accredited."
+  />
+
+  <section class="content-section section-grid">
+    <div>
+      <h2>A community-ready process.</h2>
+    </div>
+    <ol class="accreditation-steps">
+      <li><strong>Confirm authority.</strong><span>Who owns, stewards, uses, and speaks for the place? Record consent and decision rights.</span></li>
+      <li><strong>Define the project.</strong><span>Set boundaries, purpose, duration, activities, responsibilities, risks, and intended benefits.</span></li>
+      <li><strong>Establish the baseline.</strong><span>Document ecological condition, reference ecosystem, species knowledge, threats, and data gaps.</span></li>
+      <li><strong>Choose principles and methods.</strong><span>Align restoration practice with relevant standards and local knowledge governance.</span></li>
+      <li><strong>Monitor and adapt.</strong><span>Set repeatable indicators, methods, responsibilities, reporting intervals, and review triggers.</span></li>
+      <li><strong>Select an assessor.</strong><span>Compare scope, eligibility, cost, evidence, safeguards, renewal, and public claims.</span></li>
+      <li><strong>Prepare the evidence pack.</strong><span>Keep governance records, maps, methods, observations, images, approvals, and change logs.</span></li>
+      <li><strong>Publish carefully.</strong><span>State the exact assessment status and never imply certification before it is awarded.</span></li>
+    </ol>
+  </section>
+
+  <section class="content-section field-path">
+    <div class="criteria-header">
+      <h2>The Global Biodiversity Standard: eight criteria.</h2>
+      <p>
+        The 2024 TGBS manual is a restoration-quality reference published by
+        Botanic Gardens Conservation International and the Society for
+        Ecological Restoration.
+      </p>
+    </div>
+    <ol class="criteria-grid">
+      {tgbsCriteria.map((criterion) => <li>{criterion}</li>)}
+    </ol>
+  </section>
+
+  <section class="content-section">
+    <div class="section-grid">
+      <div>
+        <h2>Tiers and renewal.</h2>
+        <p>
+          TGBS certification is valid for five years before renewal is
+          required. The manual describes the following levels.
+        </p>
+      </div>
+      <div class="tier-register">
+        {
+          tgbsTiers.map((tier) => (
+            <article>
+              <h3>{tier.name}</h3>
+              <p>{tier.detail}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+    <SourceNote label="Framework boundary">
+      <p>
+        TGBS can help projects access carbon and biodiversity-credit markets,
+        but it is a restoration-quality certification—not a credit registry
+        and not evidence that a project has issued credits.
+      </p>
+    </SourceNote>
+  </section>
+
+  <section class="content-section section-grid">
+    <div>
+      <h2>What Sol Kin needs before claiming progress.</h2>
+    </div>
+    <div>
+      <ul class="record-list">
+        <li><strong>Governance</strong><span>Confirmed project stewards and community authorization.</span></li>
+        <li><strong>Place</strong><span>Boundaries and approved public location details.</span></li>
+        <li><strong>Baseline</strong><span>Methods and observations for ecosystems and species.</span></li>
+        <li><strong>Plan</strong><span>Activities, safeguards, resources, and responsibilities.</span></li>
+        <li><strong>Reports</strong><span>Dated evidence of work, change, limits, and learning.</span></li>
+        <li><strong>Assessment</strong><span>A selected framework and independent review path.</span></li>
+      </ul>
+      <a class="button" href="/support/?interest=evidence-contribution">
+        Contribute verified evidence
+      </a>
+    </div>
+  </section>
+
+  <SourceNote label="Primary reference">
+    <p class="reference-path">
+      Project References/project_support_materials/TGBS-Manual-English-Med-res.txt
+    </p>
+  </SourceNote>
+</SiteLayout>
+
+<style>
+  .accreditation-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .accreditation-steps li {
+    border-top: 1px solid var(--ink);
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: minmax(11rem, 0.35fr) 1fr;
+    padding: var(--space-md) 0;
+  }
+
+  .accreditation-steps li:last-child {
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .criteria-header {
+    align-items: end;
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: 1fr 0.55fr;
+    margin-bottom: var(--space-lg);
+  }
+
+  .criteria-grid {
+    border-top: 2px solid var(--white);
+    counter-reset: criteria;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .criteria-grid li {
+    border-bottom: 1px solid var(--white);
+    counter-increment: criteria;
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: 2rem 1fr;
+    padding: var(--space-md);
+  }
+
+  .criteria-grid li:nth-child(odd) {
+    border-right: 1px solid var(--white);
+  }
+
+  .criteria-grid li::before {
+    color: var(--survey);
+    content: counter(criteria, decimal-leading-zero);
+    font-family: var(--font-display);
+    font-weight: 900;
+  }
+
+  .tier-register {
+    border-top: 2px solid var(--ink);
+  }
+
+  .tier-register article {
+    border-bottom: 1px solid var(--ink);
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: minmax(10rem, 0.4fr) 1fr;
+    padding: var(--space-md) 0;
+  }
+
+  .tier-register h3,
+  .tier-register p {
+    margin: 0;
+  }
+
+  @media (max-width: 48rem) {
+    .criteria-header,
+    .criteria-grid,
+    .accreditation-steps li,
+    .tier-register article {
+      grid-template-columns: 1fr;
+    }
+
+    .criteria-grid li:nth-child(odd) {
+      border-right: 0;
+    }
+  }
+</style>

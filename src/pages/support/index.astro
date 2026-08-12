@@ -1,0 +1,194 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import SourceNote from "@/components/SourceNote.astro";
+
+const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL || "";
+---
+
+<SiteLayout
+  title="Participate and support"
+  description="Prepare an honest participation inquiry for Sol Kin projects, community discovery, volunteering, evidence, or future support."
+>
+  <PageHeader
+    title="Bring time, evidence, skill, or future support."
+    marker="Participation desk"
+    introduction="There is no configured payment processor, booking system, volunteer placement, or public contact address in the source library. This page prepares an inquiry without pretending it has been submitted."
+  />
+
+  <section class="content-section section-grid">
+    <div>
+      <h2>Choose a contribution.</h2>
+      <p>
+        The most useful early contributions help turn open items into verified
+        public records.
+      </p>
+    </div>
+    <div class="split-list">
+      <div><h3>Volunteer interest</h3><p>Skills, availability, languages, and access needs.</p></div>
+      <div><h3>Community nomination</h3><p>Steward-approved listing information and public contact.</p></div>
+      <div><h3>Primary evidence</h3><p>Documents, dates, project records, approved images, or monitoring methods.</p></div>
+      <div><h3>Future funding</h3><p>Interest only—no donation or investment is accepted here.</p></div>
+    </div>
+  </section>
+
+  <section class="content-section contact-section">
+    <div>
+      <h2>Prepare an interest message.</h2>
+      <p>
+        Required fields are checked in your browser. If a public contact email
+        is configured, your email application will open with the message. If
+        not, you can copy it for later. No data is sent to a server by this site.
+      </p>
+      {
+        !contactEmail && (
+          <SourceNote label="Contact not yet configured">
+            <p>
+              Add <code>PUBLIC_CONTACT_EMAIL</code> before launch to enable the
+              email handoff. Until then, this form only prepares copy.
+            </p>
+          </SourceNote>
+        )
+      }
+    </div>
+
+    <form id="interest-form" data-recipient={contactEmail}>
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="name">Name</label>
+          <input id="name" name="name" autocomplete="name" required />
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="form-field full">
+          <label for="interest">What are you interested in?</label>
+          <select id="interest" name="interest" required>
+            <option value="">Choose one</option>
+            <option value="Volunteer interest">Volunteer interest</option>
+            <option value="Community nomination">Community nomination</option>
+            <option value="Primary evidence">Primary evidence</option>
+            <option value="Future funding conversation">Future funding conversation</option>
+            <option value="Project learning">Project learning</option>
+          </select>
+        </div>
+        <div class="form-field full">
+          <label for="message">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            minlength="20"
+            required
+            placeholder="Share the context, source, skill, or question you want Sol Kin to review."
+          ></textarea>
+        </div>
+      </div>
+      <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+      <div class="button-row">
+        <button type="submit">Prepare email</button>
+        <button type="button" class="button light" id="copy-message">
+          Copy message
+        </button>
+      </div>
+    </form>
+  </section>
+</SiteLayout>
+
+<script>
+  import { createInterestMailto } from "@/lib/contact";
+
+  const form = document.querySelector<HTMLFormElement>("#interest-form");
+  const status = document.querySelector<HTMLElement>("#form-status");
+  const copyButton = document.querySelector<HTMLButtonElement>("#copy-message");
+
+  const readMessage = () => {
+    if (!form) return null;
+    const data = new FormData(form);
+    return {
+      name: String(data.get("name") || ""),
+      email: String(data.get("email") || ""),
+      interest: String(data.get("interest") || ""),
+      message: String(data.get("message") || "")
+    };
+  };
+
+  const showStatus = (message: string) => {
+    if (!status) return;
+    status.textContent = message;
+    status.dataset.visible = "true";
+  };
+
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+    const value = readMessage();
+    if (!value) return;
+    const mailto = createInterestMailto(form.dataset.recipient, value);
+    if (!mailto) {
+      showStatus(
+        "No public contact address is configured. Your message has not been sent. Use “Copy message” to keep it."
+      );
+      return;
+    }
+    showStatus(
+      "Opening your email application. The message is not sent until you review and send it there."
+    );
+    window.location.href = mailto;
+  });
+
+  copyButton?.addEventListener("click", async () => {
+    if (!form?.reportValidity()) return;
+    const value = readMessage();
+    if (!value) return;
+    const text = [
+      `Name: ${value.name}`,
+      `Email: ${value.email}`,
+      `Interest: ${value.interest}`,
+      "",
+      value.message
+    ].join("\n");
+
+    try {
+      await navigator.clipboard.writeText(text);
+      showStatus("Message copied. It has not been submitted or sent.");
+    } catch {
+      showStatus(
+        "Copy was blocked by your browser. Select the form text manually; nothing has been submitted."
+      );
+    }
+  });
+
+  const interestFromQuery = new URLSearchParams(window.location.search).get("interest");
+  const select = document.querySelector<HTMLSelectElement>("#interest");
+  const mapping: Record<string, string> = {
+    "community-nomination": "Community nomination",
+    "source-contribution": "Primary evidence",
+    "evidence-contribution": "Primary evidence"
+  };
+  if (select && interestFromQuery) {
+    const mapped = mapping[interestFromQuery] || "Project learning";
+    select.value = mapped;
+  }
+</script>
+
+<style>
+  .contact-section {
+    background: var(--survey);
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: 0.65fr 1.35fr;
+  }
+
+  form {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    padding: var(--space-lg);
+  }
+
+  @media (max-width: 48rem) {
+    .contact-section {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

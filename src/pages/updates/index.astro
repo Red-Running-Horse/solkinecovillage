@@ -1,0 +1,84 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import StatusStamp from "@/components/StatusStamp.astro";
+import { updates } from "@/data/updates";
+---
+
+<SiteLayout
+  title="Updates and field reports"
+  description="Site notes, project updates, and future evidence-led field reports from Sol Kin Ecovillage."
+>
+  <PageHeader
+    title="Updates are reports, not applause lines."
+    marker="Field reports"
+    introduction="This publishing surface is ready for dated project work, methods, observations, images, decisions, setbacks, and next steps. The first entry records how the public evidence ledger begins."
+  />
+
+  <section class="update-ledger">
+    {
+      updates.map((update) => (
+        <article>
+          <time datetime={update.published}>
+            {new Date(`${update.published}T12:00:00`).toLocaleDateString("en", {
+              year: "numeric",
+              month: "long",
+              day: "numeric"
+            })}
+          </time>
+          <div>
+            <h2>{update.title}</h2>
+            <p>{update.summary}</p>
+          </div>
+          <StatusStamp status={update.kind} evidenceState="source-backed" />
+        </article>
+      ))
+    }
+  </section>
+
+  <section class="content-section section-grid field-path">
+    <div>
+      <h2>Every future report should carry.</h2>
+    </div>
+    <ul class="record-list">
+      <li><strong>Who</strong><span>Author, project, stewards, and reviewers.</span></li>
+      <li><strong>When</strong><span>Observation date and publication date.</span></li>
+      <li><strong>Where</strong><span>Approved location detail and project boundary.</span></li>
+      <li><strong>Method</strong><span>How evidence was collected and what it cannot show.</span></li>
+      <li><strong>Finding</strong><span>Observed change, unchanged conditions, or new uncertainty.</span></li>
+      <li><strong>Source</strong><span>Documents, datasets, media, and approvals behind the report.</span></li>
+    </ul>
+  </section>
+</SiteLayout>
+
+<style>
+  .update-ledger {
+    border-top: 2px solid var(--ink);
+  }
+
+  .update-ledger article {
+    align-items: start;
+    border-bottom: 2px solid var(--ink);
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: minmax(10rem, 0.3fr) 1fr minmax(10rem, 0.25fr);
+    padding: var(--space-lg) var(--gutter);
+  }
+
+  .update-ledger time {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .update-ledger h2 {
+    font-size: clamp(2rem, 4vw, 4rem);
+  }
+
+  @media (max-width: 48rem) {
+    .update-ledger article {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

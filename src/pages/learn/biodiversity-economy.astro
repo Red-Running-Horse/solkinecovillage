@@ -1,0 +1,104 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import SourceNote from "@/components/SourceNote.astro";
+import {
+  biodiversityDefinition,
+  bffDefinition
+} from "@/data/standards";
+---
+
+<SiteLayout
+  title="Biodiversity economy"
+  description="Learn how biodiversity, community governance, regenerative finance, and Bioregional Financing Facilities relate—without treating credits as a shortcut."
+>
+  <PageHeader
+    title="Biodiversity is living infrastructure, not a score."
+    marker="Learning field"
+    introduction={biodiversityDefinition}
+  />
+
+  <article class="content-section reading-column">
+    <h2>What a biodiversity economy should protect.</h2>
+    <p>
+      A biodiversity economy connects livelihoods and investment to the health
+      of living systems. Done credibly, it begins with ecological integrity,
+      local rights, community governance, and transparent evidence—not with a
+      financial product looking for a landscape.
+    </p>
+
+    <div class="split-list">
+      <div>
+        <h3>Ecological value</h3>
+        <p>Species, habitats, genetic diversity, ecosystem function, and resilience.</p>
+      </div>
+      <div>
+        <h3>Community value</h3>
+        <p>Rights, knowledge, livelihoods, governance, access, and benefit sharing.</p>
+      </div>
+      <div>
+        <h3>Evidence value</h3>
+        <p>Baseline conditions, methods, monitoring, uncertainty, and independent review.</p>
+      </div>
+      <div>
+        <h3>Financial value</h3>
+        <p>Funding tools that serve the first three forms of value rather than displacing them.</p>
+      </div>
+    </div>
+
+    <h2>Where credits fit—and where they do not.</h2>
+    <p>
+      Biodiversity credits are one possible financing instrument. They are not
+      a synonym for accreditation, and they do not replace governance,
+      ecological restoration, or long-term monitoring. A credible project
+      would need to establish rights, additionality, measurement, safeguards,
+      benefit distribution, independent validation, a registry or buyer
+      framework, and durable oversight.
+    </p>
+
+    <SourceNote label="Current Sol Kin status">
+      <p>
+        No source in this repository shows a Sol Kin or X-Hazil initiative as
+        accredited, registered, issuing biodiversity credits, or receiving
+        biodiversity-credit revenue.
+      </p>
+    </SourceNote>
+
+    <h2>BFF: a place-based financing institution.</h2>
+    <p>{bffDefinition}</p>
+    <p>
+      The 2024 BioFi publication describes possible structures such as a
+      bioregional trust or bank, project-portfolio coordination, and
+      bioregional eco-credit programs. These are reference models, not
+      operational claims about Sol Kin.
+    </p>
+
+    <h2>A responsible sequence.</h2>
+    <ol class="timeline pathway-timeline">
+      <li><time>Place</time><span>Define the bioregion, communities, ecosystems, pressures, and rights.</span></li>
+      <li><time>Mandate</time><span>Establish participatory governance and who can make which decisions.</span></li>
+      <li><time>Portfolio</time><span>Assemble connected projects that address systemic needs rather than isolated transactions.</span></li>
+      <li><time>Evidence</time><span>Build transparent ecological and social monitoring into every project.</span></li>
+      <li><time>Capital</time><span>Match grants, investment, public finance, and possible credits to the work they can responsibly fund.</span></li>
+      <li><time>Account</time><span>Publish decisions, flows, benefits, risks, and learning back to the place.</span></li>
+    </ol>
+
+    <div class="button-row">
+      <a class="button" href="/learn/accreditation/">Continue to accreditation</a>
+      <a class="button light" href="/projects/">Return to projects</a>
+    </div>
+
+    <SourceNote label="Reference">
+      <p class="reference-path">
+        Project References/project_support_materials/Bioregional-Financing-Facilities-ebook-2024.txt
+      </p>
+    </SourceNote>
+  </article>
+</SiteLayout>
+
+<style>
+  .pathway-timeline time {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+  }
+</style>

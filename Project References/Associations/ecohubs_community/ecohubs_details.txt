@@ -1,0 +1,38 @@
+ecohubs.community is an online platform and collaborative project dedicated to designing a Regenerative Community Operating System (RCOS). Unlike traditional community organizations that focus on physical locations, EcoHubs is currently an online-first collective working to create a "blueprint" for how regenerative communities can function, scale, and become resilient.
+
+Their core mission is to make the model of regenerative living accessible, normal, and repeatable by documenting lessons from past failures and successes, rather than trying to build a single physical hub themselves 
+3.
+
+Core Concept: The RCOS (Regenerative Community Operating System)
+The central output of EcoHubs is the RCOS, a "forkable" blueprint or operating system for communities.
+
+What it does: It provides ready-to-use structures for decision-making, role definition, resource sharing, and conflict resolution. This allows communities to focus on building rather than reinventing the wheel 
+5.
+Philosophy: The system is designed to be decentralized. There is no central authority approving hubs; local communities can "fork" the blueprint, deciding what to keep, change, or discard to fit their specific context 
+4.
+Nature as Partner: The model views nature not as a backdrop but as an integral "half of the community," aiming to reduce dependency on fragile global supply chains and keep value local 
+3.
+Current Status and Activities
+EcoHubs is in a unique phase where it is simultaneously forming a community, developing the blueprint, and running pilot projects 
+3.
+
+Online Collaboration: The community currently operates online, where members co-design the operating system, develop open-source tools, and plan initiatives. They explicitly state they are not currently creating physical hubs or recruiting for a physical community, though future pilot projects are planned 
+2.
+The Pilot in Ecuador: A significant milestone is the active pilot of their blueprint in an existing community in Ecuador, which began in March 2026. This pilot tests the framework under real ecological, social, and economic constraints, with lessons feeding directly back into the standard 
+3.
+Governance Transition: The project is currently in an early "founder-led" phase but is actively transitioning toward community governance, where earned tokens and experience will unlock permissions and responsibilities 
+2.
+Membership and Engagement
+Membership is designed to be participatory rather than passive.
+
+Roles: Members can contribute to the blueprint, develop the platform's technical integrations, shape creative direction, or plan initiatives 
+2.
+Future Model: The long-term vision includes a token-based system where contributions (earned tokens and experience) grant access to different levels of decision-making and responsibility within the ecosystem 
+2.
+Related Projects and Connections
+The term "EcoHub" can sometimes refer to specific physical land projects, which may cause confusion.
+
+Black Land Ownership: There is a separate initiative called "The Eco Hub" (or similar naming) supported by Purpose Earth (a partner of the Holomovement mentioned in your previous query). This specific project involves 37 acres in Otsego County, New York, aimed at empowering Black people to purchase land and creating educational platforms for marginalized communities 
+6.
+Distinction: While the Purpose Earth project is a specific physical land initiative, ecohubs.community is the broader, online-driven effort to create the system (RCOS) that such physical projects can use to operate effectively 
+3.

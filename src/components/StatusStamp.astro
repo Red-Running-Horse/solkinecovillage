@@ -1,0 +1,18 @@
+---
+import type { EvidenceState } from "@/data/types";
+
+interface Props {
+  status: string;
+  evidenceState?: EvidenceState;
+}
+
+const { status, evidenceState } = Astro.props;
+const evidenceLabel = {
+  "source-backed": "Source-backed",
+  "brief-confirmed": "Confirmed by project brief",
+  open: "Open item"
+};
+---
+
+<span class="status-stamp">{status}</span>
+{evidenceState && <span class="evidence-state">{evidenceLabel[evidenceState]}</span>}

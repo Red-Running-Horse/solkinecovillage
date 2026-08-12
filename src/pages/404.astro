@@ -1,0 +1,41 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+---
+
+<SiteLayout title="Field record not found" noindex>
+  <section class="not-found">
+    <span aria-hidden="true">404</span>
+    <div>
+      <h1>This field record is not here.</h1>
+      <p>
+        The route may have moved, or the record may not have been published yet.
+      </p>
+      <a class="button" href="/">Return to the atlas</a>
+    </div>
+  </section>
+</SiteLayout>
+
+<style>
+  .not-found {
+    align-items: end;
+    background: var(--survey);
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: 0.5fr 1fr;
+    min-height: 70svh;
+    padding: var(--space-xl) var(--gutter);
+  }
+
+  .not-found > span {
+    font-family: var(--font-display);
+    font-size: clamp(8rem, 24vw, 24rem);
+    font-weight: 900;
+    line-height: 0.7;
+  }
+
+  @media (max-width: 48rem) {
+    .not-found {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

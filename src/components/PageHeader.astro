@@ -1,0 +1,15 @@
+---
+interface Props {
+  title: string;
+  introduction: string;
+  marker?: string;
+}
+
+const { title, introduction, marker = "Field register" } = Astro.props;
+---
+
+<header class="page-header ruled-grid">
+  <h1>{title}</h1>
+  <p class="marker">{marker}</p>
+  <p class="page-intro">{introduction}</p>
+</header>

@@ -1,0 +1,228 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import StatusStamp from "@/components/StatusStamp.astro";
+import SourceNote from "@/components/SourceNote.astro";
+import { projects } from "@/data/projects";
+import type { Project } from "@/data/types";
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project }
+  }));
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<SiteLayout title={project.title} description={project.summary}>
+  <header class="project-header">
+    <div class="project-title">
+      <a href="/projects/">← All projects</a>
+      <h1>{project.title}</h1>
+    </div>
+    <div class="project-status">
+      <StatusStamp status={project.status} evidenceState={project.evidenceState} />
+      <p>{project.summary}</p>
+    </div>
+  </header>
+
+  <section class="project-purpose">
+    <p>{project.purpose}</p>
+  </section>
+
+  <div class="record-columns">
+    <section aria-labelledby="known-heading">
+      <h2 id="known-heading">What the record supports.</h2>
+      <ul class="record-list">
+        {project.known.map((item) => <li><strong>Known</strong><span>{item}</span></li>)}
+      </ul>
+    </section>
+    <section aria-labelledby="open-heading">
+      <h2 id="open-heading">What must be documented next.</h2>
+      <ul class="record-list">
+        {project.openItems.map((item) => <li><strong>Open</strong><span>{item}</span></li>)}
+      </ul>
+    </section>
+  </div>
+
+  <section class="content-section project-sources">
+    <div>
+      <h2>Source register.</h2>
+      {
+        project.sourceRefs.length > 0 ? (
+          <ul class="record-list">
+            {project.sourceRefs.map((source) => (
+              <li>
+                <strong>{source.label}</strong>
+                <span>
+                  {source.detail && <span>{source.detail}</span>}
+                  <code class="reference-path">{source.path}</code>
+                </span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <SourceNote label="No project source on file">
+            <p>
+              The initiative is confirmed by the Sol Kin project brief, but no
+              primary project document is present in the repository yet.
+            </p>
+          </SourceNote>
+        )
+      }
+    </div>
+    <div class="participation-block">
+      <h2>Participate without overpromising.</h2>
+      <p>{project.participation}</p>
+      <a class="button" href={`/support/?interest=${project.slug}`}>
+        Register interest
+      </a>
+      <p class="small-print">
+        This does not create a booking, donation, volunteer placement, or
+        project membership.
+      </p>
+    </div>
+  </section>
+</SiteLayout>
+
+<style>
+  .project-header {
+    background: var(--survey);
+    border-bottom: 2px solid var(--ink);
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    min-height: 65svh;
+  }
+
+  .project-title,
+  .project-status {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--space-lg) var(--gutter);
+  }
+
+  .project-title {
+    border-right: 2px solid var(--ink);
+  }
+
+  .project-title > a {
+    font-size: 0.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .project-title h1 {
+    max-width: 12ch;
+  }
+
+  .project-status {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(4rem - 1px),
+      rgba(16, 21, 16, 0.16) 4rem
+    );
+  }
+
+  .project-status p {
+    font-size: clamp(1.15rem, 2vw, 1.55rem);
+    font-weight: 700;
+  }
+
+  .project-purpose {
+    border-bottom: 2px solid var(--ink);
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 4.3rem);
+    font-weight: 800;
+    line-height: 1.08;
+    padding: var(--space-xl) var(--gutter);
+    text-transform: uppercase;
+  }
+
+  .project-purpose p {
+    margin: 0;
+    max-width: 28ch;
+  }
+
+  .record-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .record-columns section {
+    padding: var(--space-xl) var(--gutter);
+  }
+
+  .record-columns section:first-child {
+    background: var(--paper-blue);
+    border-right: 2px solid var(--ink);
+  }
+
+  .record-columns h2 {
+    font-size: clamp(2rem, 4vw, 3.8rem);
+  }
+
+  .record-list li {
+    grid-template-columns: 6rem 1fr;
+  }
+
+  .record-list code {
+    display: block;
+    margin-top: var(--space-xs);
+  }
+
+  .project-sources {
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+
+  .participation-block {
+    background: var(--survey);
+    border: 2px solid var(--ink);
+    padding: var(--space-lg);
+  }
+
+  .participation-block h2 {
+    font-size: clamp(2rem, 4vw, 3.8rem);
+  }
+
+  .small-print {
+    font-size: 0.83rem;
+    font-weight: 700;
+  }
+
+  @media (max-width: 48rem) {
+    .project-header,
+    .record-columns,
+    .project-sources {
+      grid-template-columns: 1fr;
+    }
+
+    .project-header {
+      min-height: auto;
+    }
+
+    .project-title {
+      border-bottom: 2px solid var(--ink);
+      border-right: 0;
+      gap: var(--space-xl);
+      min-height: 30rem;
+    }
+
+    .project-status {
+      min-height: 18rem;
+    }
+
+    .record-columns section:first-child {
+      border-bottom: 2px solid var(--ink);
+      border-right: 0;
+    }
+  }
+</style>

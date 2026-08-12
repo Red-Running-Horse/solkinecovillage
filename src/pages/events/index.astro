@@ -1,0 +1,50 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import SourceNote from "@/components/SourceNote.astro";
+import { events } from "@/data/updates";
+---
+
+<SiteLayout
+  title="Events"
+  description="Verified public events, learning sessions, community visits, and reporting dates from Sol Kin Ecovillage."
+>
+  <PageHeader
+    title="The calendar waits for a real date."
+    marker="Event register"
+    introduction="No verified Sol Kin event date, venue, capacity, host, accessibility detail, or registration path appears in the current source library."
+  />
+
+  <section class="content-section">
+    {
+      events.map((event) => (
+        <div class="empty-register">
+          <h2>{event.title}</h2>
+          <p>{event.summary}</p>
+          <span class="status-stamp">{event.status}</span>
+        </div>
+      ))
+    }
+  </section>
+
+  <section class="content-section section-grid">
+    <div>
+      <h2>What an event entry needs.</h2>
+    </div>
+    <div>
+      <ul class="record-list">
+        <li><strong>Host</strong><span>Confirmed organizer and public contact.</span></li>
+        <li><strong>When</strong><span>Date, local time, duration, and update policy.</span></li>
+        <li><strong>Where</strong><span>Venue, meeting point, transport, and location permissions.</span></li>
+        <li><strong>Access</strong><span>Capacity, cost, language, mobility, age, and safety information.</span></li>
+        <li><strong>Action</strong><span>A real registration path or an honest no-registration notice.</span></li>
+      </ul>
+      <SourceNote>
+        <p>
+          External events mentioned in organization research notes are not Sol
+          Kin events and are therefore not republished here.
+        </p>
+      </SourceNote>
+    </div>
+  </section>
+</SiteLayout>
